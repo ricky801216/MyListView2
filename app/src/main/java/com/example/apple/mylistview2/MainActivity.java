@@ -11,11 +11,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     String city[] = {"台北","台中","台南","高雄"};
     String code[] = {"02", "04", "06", "07"};
-    ArrayList<Map<String, String>> data = new ArrayList();
+    Integer img[] = {R.drawable.a1,R.drawable.a2,R.drawable.lol,R.drawable.ppp};
+    ArrayList<Map<String, Object>> data = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +25,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         for(int i = 0;i<city.length;i++){
-            Map<String, String> m = new HashMap();
+            Map<String, Object> m = new HashMap();
             m.put("city",city[i]);
             m.put("code",code[i]);
+            m.put("img",img[i]);
             data.add(m);
         }
         ListView lv = (ListView)findViewById(R.id.listView);
         SimpleAdapter adapter = new SimpleAdapter(MainActivity.this, data, R.layout.mylist,
-                new String[]{"city", "code"}, new int[] {R.id.textView, R.id.textView2});
+                new String[]{"city", "code","img"}, new int[] {R.id.textView, R.id.textView2, R.id.imageView});
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
